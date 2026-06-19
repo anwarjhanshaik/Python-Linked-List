@@ -7,8 +7,10 @@ class SLL:
   def __init__(self, head = None):
     self.head = head
     self.size = 0
-    for current in self:
+    current = self.head
+    while current:
       self.size += 1
+      current = current.next
   
   def __len__(self):
     return self.size
@@ -16,33 +18,37 @@ class SLL:
   def __iter__(self):
     current = self.head
     while current:
-      yield current 
+      yield current.data 
       current = current.next
     
   def __str__(self):
     if self.is_empty():
       return "List is empty"
     self.check_and_fix_cycle()
-    result = [] 
-    for current in self:
-      result.append(str(current.data))
+    result = []
+    for node_data in self:
+      result.append(f"{node_data}")
     return " --> ".join(result) + " --> None"
   
   def is_empty(self):
     return self.head == None 
   
   def search(self, item):
-    for current in self:
+    current = self.head
+    while current:
       if current.data == item:
         return current 
-    return None
+      current = current.next
+    return 
   
   def find_index(self, item):
     index = 0
-    for current in self:
+    current = self.head
+    while current:
       if current.data == item:
         return index
       index += 1
+      current = current.next
     return -1
   
   def find_middle(self):
@@ -67,10 +73,12 @@ class SLL:
     if (self.is_empty() or (index < 0) or (index >= len(self))):
       raise IndexError("Out of range")
     temp = 0
-    for current in self:
+    current = self.head
+    while current:
       if temp == index:
         return current
       temp += 1
+      current = current.next
   
   def insert_at_index(self, index, item):
     if index < 0:
@@ -114,7 +122,7 @@ class SLL:
       return 
     self.head = self.head.next
     self.size -= 1
-  
+    
   def remove_at_last(self):
     if self.is_empty():
       return 
@@ -282,7 +290,6 @@ my_list.remove_at_start()
 print(my_list)
 
 print("Removing the last item (30)...")
-my_list.remove_at_last()
 print(my_list)
 print(f"Final list size: {len(my_list)}")
 print()
