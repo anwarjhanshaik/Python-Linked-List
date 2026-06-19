@@ -7,10 +7,8 @@ class SLL:
   def __init__(self, head = None):
     self.head = head
     self.size = 0
-    current = self.head
-    while current:
+    for current in self:
       self.size += 1
-      current = current.next
   
   def __len__(self):
     return self.size
@@ -25,32 +23,26 @@ class SLL:
     if self.is_empty():
       return "List is empty"
     self.check_and_fix_cycle()
-    result = []
-    current = self.head
-    while current:
+    result = [] 
+    for current in self:
       result.append(str(current.data))
-      current = current.next
     return " --> ".join(result) + " --> None"
   
   def is_empty(self):
     return self.head == None 
   
   def search(self, item):
-    current = self.head
-    while current:
+    for current in self:
       if current.data == item:
         return current 
-      current = current.next
-    return 
+    return None
   
   def find_index(self, item):
     index = 0
-    current = self.head
-    while current:
+    for current in self:
       if current.data == item:
         return index
       index += 1
-      current = current.next
     return -1
   
   def find_middle(self):
@@ -75,12 +67,10 @@ class SLL:
     if (self.is_empty() or (index < 0) or (index >= len(self))):
       raise IndexError("Out of range")
     temp = 0
-    current = self.head
-    while current:
+    for current in self:
       if temp == index:
         return current
       temp += 1
-      current = current.next
   
   def insert_at_index(self, index, item):
     if index < 0:
